@@ -11,25 +11,27 @@
 <div class="container">
     <header>
         <h1>💰Money Track💰</h1>
-        <p class="subtitle">Never lose track of your money!</p>
+        <p class="subtitle">Never lose track of your money</p>
 
-        <div class="currency-selector">
-            <label for="currency-select">Currency: </label>
-            <select id="currency-select">
-                <option value="BGN">лв.</option>
-                <option value="USD">$</option>
-                <option value="EUR">€</option>
-            </select>
-        </div>
+        <div class="settings">
+            <div class="currency-selector">
+                <label for="currency-select">Currency: </label>
+                <select id="currency-select">
+                    <option value="BGN">лв.</option>
+                    <option value="USD">$</option>
+                    <option value="EUR">€</option>
+                </select>
+            </div>
 
-        <div class="type-selector">
-            <label for="type-select">Type:</label>
-            <select id="type-select">
-                <option value="expense">Expense</option>
-                <option value="income">Income</option>
-                <option value="saving">Savings</option>
+            <div class="type-selector">
+                <label for="type-select">Type:</label>
+                <select id="type-select">
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                    <option value="saving">Savings</option>
 
-            </select>
+                </select>
+            </div>
         </div>
 
     </header>
@@ -41,7 +43,7 @@
     <section id="filters">
         <button data-filter="all" class="filter-btn active">All</button>
         <button data-filter="income" class="filter-btn">Income</button>
-        <button data-filter="expense" class="filter-btn">Expense</button>
+        <button data-filter="expense" class="filter-btn">Expenses</button>
         <button data-filter="saving" class="filter-btn">Savings</button>
     </section>
     <ul id="entries-list"></ul>
