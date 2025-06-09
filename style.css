@@ -35,14 +35,20 @@ header .subtitle {
     margin-bottom: 1rem;
 }
 
-header .currency-selector {
+header .settings {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
     margin-top: 0.5rem;
 }
-header .currency-selector select {
+.currency-selector select,
+.type-selector select {
     padding: 0.3rem;
     border-radius: 4px;
     border: 1px solid var(--primary);
 }
+
+
 
 .entry-form {
     display: grid;
