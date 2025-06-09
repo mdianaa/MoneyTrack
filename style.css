@@ -61,27 +61,29 @@ header .settings {
 
 .currency-selector select,
 .type-selector select {
+    margin-top: 1rem;
     padding: 0.3rem;
     border-radius: 4px;
     border: 1px solid var(--primary);
 }
 
 .type-selector {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
 }
 
 .entry-form {
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
-    gap: 2rem;
-    margin-bottom: 1rem;
+    grid-template-columns: max-content max-content max-content;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .entry-form input, .entry-form select {
     border: 2px solid var(--secondary);
     border-radius: 8px;
     padding: 0.75rem;
+    max-width: 150px;
 }
 
 .entry-form input:focus {
