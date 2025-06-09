@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const filters = document.querySelectorAll('.filter-btn');
     const totalEl = document.getElementById('total-sum');
     const savingsEl = document.getElementById('savings-sum');
-
     const currencySymbols = { BGN: 'лв.', USD: '$', EUR: '€' };
 
     let currency = localStorage.getItem('currency') || 'BGN';
@@ -23,22 +22,31 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentFilter = 'all';
 
     async function loadAndRender() {
-        const entries = await getAllEntries();
+        const entries = await getAllEntries(); // от db.js
         render(entries);
     }
 
     function render(entries) {
         list.innerHTML = '';
-        let total   = 0;
-        let savings = 0;
+
+        let fullTotal   = 0;
+        let fullSavings = 0;
         const symbol = currencySymbols[currency];
+
+        entries.forEach(e => {
+            if (e.type === 'expense')   fullTotal   -= e.amount;
+            else if (e.type === 'income')  fullTotal   += e.amount;
+            else if (e.type === 'saving')  fullSavings += e.amount;
+        });
+
+        totalEl.textContent   = `${fullTotal.toFixed(2)} ${symbol}`;
+        savingsEl.textContent = `${fullSavings.toFixed(2)} ${symbol}`;
 
         entries
             .filter(e => currentFilter === 'all' || e.type === currentFilter)
             .forEach(e => {
                 const li = document.createElement('li');
                 li.className = `entry-item ${e.type}`;
-
                 li.innerHTML = `
           <span class="amount">
             ${e.type === 'expense' ? '−' : '+'}${e.amount.toFixed(2)} ${symbol}
@@ -47,14 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <button data-id="${e.id}" class="del-btn">🗑️</button>
         `;
                 list.append(li);
-
-                if (e.type === 'expense')   total   -= e.amount;
-                else if (e.type === 'income')  total   += e.amount;
-                else if (e.type === 'saving')  savings += e.amount;
             });
-
-        totalEl.textContent   = `${total.toFixed(2)} ${symbol}`;
-        savingsEl.textContent = `${savings.toFixed(2)} ${symbol}`;
     }
 
     addBtn.addEventListener('click', async () => {
