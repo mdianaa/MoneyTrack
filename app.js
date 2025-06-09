@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const list = document.getElementById('entries-list');
     const filters = document.querySelectorAll('.filter-btn');
     const totalEl = document.getElementById('total-sum');
+    const savingsEl = document.getElementById('savings-sum');
 
     const currencySymbols = { BGN: 'лв.', USD: '$', EUR: '€' };
 
@@ -28,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function render(entries) {
         list.innerHTML = '';
-        let total = 0;
+        let total   = 0;
+        let savings = 0;
         const symbol = currencySymbols[currency];
 
         entries
@@ -36,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .forEach(e => {
                 const li = document.createElement('li');
                 li.className = `entry-item ${e.type}`;
+
                 li.innerHTML = `
           <span class="amount">
             ${e.type === 'expense' ? '−' : '+'}${e.amount.toFixed(2)} ${symbol}
@@ -43,20 +46,21 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="category">${e.category}</span>
           <button data-id="${e.id}" class="del-btn">🗑️</button>
         `;
-
                 list.append(li);
-                total += e.type === 'expense'
-                    ? -e.amount
-                    :  e.amount;
+
+                if (e.type === 'expense')   total   -= e.amount;
+                else if (e.type === 'income')  total   += e.amount;
+                else if (e.type === 'saving')  savings += e.amount;
             });
 
-        totalEl.textContent = `${total.toFixed(2)} ${symbol}`;
+        totalEl.textContent   = `${total.toFixed(2)} ${symbol}`;
+        savingsEl.textContent = `${savings.toFixed(2)} ${symbol}`;
     }
 
     addBtn.addEventListener('click', async () => {
-        const amt = parseFloat(amtInput.value);
-        const cat = catInput.value.trim();
-        const type= typeSelect.value;
+        const amt  = parseFloat(amtInput.value);
+        const cat  = catInput.value.trim();
+        const type = typeSelect.value;
 
         if (isNaN(amt) || !cat) return;
 

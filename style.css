@@ -1,12 +1,13 @@
 :root {
-    --primary:       #ff9800;  /* основен оранжев */
-    --primary-dark:  #f57c00;  /* тъмен оранжев */
-    --secondary:     #ffa726;  /* светъл оранжев */
-    --bg:            #fff8e1;  /* кремав фон */
-    --card-bg:       #ffffff;  /* бял фон на картите */
+    --primary:       #ff9800;
+    --primary-dark:  #f57c00;
+    --secondary:     #ffa726;
+    --bg:            #fff8e1;
+    --card-bg:       #ffffff;
     --text:          #333;
-    --income-color:  #388e3c;  /* зелен за приход */
-    --expense-color: #d32f2f;  /* червен за разход */
+    --income-color:  #388e3c;
+    --expense-color: #d32f2f;
+    --saving-color: #1976d2;
 }
 
 body, html {
@@ -18,8 +19,24 @@ body, html {
 
 .container {
     max-width: 600px;
-    margin: auto;
+    margin: 2rem auto;
     padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.custom-select {
+    position: relative;
+}
+
+.custom-select select {
+    appearance: none;
+    padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+    border: 2px solid var(--secondary);
+    border-radius: 8px;
+    background-image: url("data:image/svg+xml,…");
+    background-position: right 0.5rem center;
 }
 
 header {
@@ -41,6 +58,7 @@ header .settings {
     gap: 1rem;
     margin-top: 0.5rem;
 }
+
 .currency-selector select,
 .type-selector select {
     padding: 0.3rem;
@@ -48,27 +66,36 @@ header .settings {
     border: 1px solid var(--primary);
 }
 
-
+.type-selector {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
 
 .entry-form {
     display: grid;
     grid-template-columns: 1fr 1fr auto;
-    gap: .5rem;
+    gap: 2rem;
     margin-bottom: 1rem;
 }
 
-.entry-form input {
+.entry-form input, .entry-form select {
     border: 2px solid var(--secondary);
     border-radius: 8px;
+    padding: 0.75rem;
 }
+
 .entry-form input:focus {
     border-color: var(--primary);
 }
-.entry-form button {
+
+.entry-form button, .filter-btn {
     background: var(--primary);
+    color: #fff;
     border-radius: 8px;
     transition: background 0.3s;
 }
+.filter-btn.active, .filter-btn:hover { background: var(--secondary); }
+
 .entry-form button:hover {
     background: var(--primary-dark);
 }
@@ -97,24 +124,29 @@ header .settings {
 }
 
 .entry-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
     background: var(--card-bg);
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     transition: transform 0.2s;
 }
-.entry-item:hover {
-    transform: scale(1.02);
-}
+.entry-item:hover { transform: scale(1.02); }
+
 .entry-item .amount {
     font-weight: bold;
     font-size: 1.1rem;
 }
-.entry-item.income .amount {
-    color: var(--income-color);
+
+.entry-item.income .amount { color: var(--income-color); }
+
+.entry-item.expense .amount { color: var(--expense-color); }
+
+.entry-item.saving .amount { color: var(--saving-color);
 }
-.entry-item.expense .amount {
-    color: var(--expense-color);
-}
+
 .entry-item button {
     color: #aaa;
     transition: color 0.2s;
@@ -126,4 +158,6 @@ header .settings {
 footer {
     color: var(--primary-dark);
     font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
 }

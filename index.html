@@ -27,6 +27,8 @@
             <select id="type-select">
                 <option value="expense">Expense</option>
                 <option value="income">Income</option>
+                <option value="saving">Savings</option>
+
             </select>
         </div>
 
@@ -40,10 +42,12 @@
         <button data-filter="all" class="filter-btn active">All</button>
         <button data-filter="income" class="filter-btn">Income</button>
         <button data-filter="expense" class="filter-btn">Expense</button>
+        <button data-filter="saving" class="filter-btn">Savings</button>
     </section>
     <ul id="entries-list"></ul>
     <footer>
         <div>Total: <span id="total-sum">0.00</span></div>
+        <div>Savings: <span id="savings-sum">0.00</span></div>
     </footer>
 </div>
 
