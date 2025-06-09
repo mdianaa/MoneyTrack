@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Expense Tracker PWA</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>💰Money track💰</h1>
+        <p class="subtitle">Never lose track of your money!</p>
+    </header>
+    <section class="entry-form">
+        <input type="number" id="amount-input" placeholder="Сума" step="0.01">
+        <input type="text" id="category-input" placeholder="Категория">
+        <button id="add-btn">➕ Добави</button>
+    </section>
+    <section id="filters">
+        <button data-filter="all" class="filter-btn active">Всички</button>
+        <button data-filter="income" class="filter-btn">Приходи</button>
+        <button data-filter="expense" class="filter-btn">Разходи</button>
+    </section>
+    <ul id="entries-list"></ul>
+    <footer>
+        <div>Общо: <span id="total-sum">0.00</span> лв.</div>
+    </footer>
+</div>
+
+<script src="db.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

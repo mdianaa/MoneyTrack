@@ -1,0 +1,114 @@
+:root {
+    --primary:       #ff9800;  /* основен оранжев */
+    --primary-dark:  #f57c00;  /* тъмен оранжев */
+    --secondary:     #ffa726;  /* светъл оранжев */
+    --bg:            #fff8e1;  /* кремав фон */
+    --card-bg:       #ffffff;  /* бял фон на картите */
+    --text:          #333;
+    --income-color:  #388e3c;  /* зелен за приход */
+    --expense-color: #d32f2f;  /* червен за разход */
+}
+
+body, html {
+    margin: 0;
+    font-family: sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 1rem;
+}
+
+header {
+    text-align: center;
+}
+header h1 {
+    font-size: 2rem;
+    color: var(--primary-dark);
+}
+header .subtitle {
+    color: var(--secondary);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.entry-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: .5rem;
+    margin-bottom: 1rem;
+}
+
+.entry-form input {
+    border: 2px solid var(--secondary);
+    border-radius: 8px;
+}
+.entry-form input:focus {
+    border-color: var(--primary);
+}
+.entry-form button {
+    background: var(--primary);
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+.entry-form button:hover {
+    background: var(--primary-dark);
+}
+
+#filters {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: 1rem;
+}
+
+.filter-btn {
+    border: 2px solid var(--secondary);
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s;
+}
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--secondary);
+    color: #fff;
+}
+
+#entries-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.entry-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+.entry-item:hover {
+    transform: scale(1.02);
+}
+.entry-item .amount {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.entry-item.income .amount {
+    color: var(--income-color);
+}
+.entry-item.expense .amount {
+    color: var(--expense-color);
+}
+.entry-item button {
+    color: #aaa;
+    transition: color 0.2s;
+}
+.entry-item button:hover {
+    color: #555;
+}
+
+footer {
+    color: var(--primary-dark);
+    font-size: 1.2rem;
+}
