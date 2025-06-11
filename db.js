@@ -35,7 +35,11 @@ async function addEntry(entry) {
     return new Promise((resolve, reject) => {
         const tx      = db.transaction(STORE_NAME, 'readwrite');
         const store   = tx.objectStore(STORE_NAME);
-        const request = store.add(entry);
+        const item = {
+            ...entry,
+            date: entry.date || new Date().toISOString()
+        };
+        const request = store.add(item);
 
         request.onsuccess = () => resolve(request.result);
         request.onerror   = () => reject(request.error);

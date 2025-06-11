@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const amtInput = document.getElementById('amount-input');
-    const catInput = document.getElementById('category-input');
-    const typeSelect = document.getElementById('type-select');
+    const amtInput       = document.getElementById('amount-input');
+    const catInput       = document.getElementById('category-input');
+    const typeSelect     = document.getElementById('type-select');
     const currencySelect = document.getElementById('currency-select');
-    const addBtn = document.getElementById('add-btn');
-    const list = document.getElementById('entries-list');
-    const filters = document.querySelectorAll('.filter-btn');
-    const totalEl = document.getElementById('total-sum');
-    const savingsEl = document.getElementById('savings-sum');
+    const addBtn         = document.getElementById('add-btn');
+    const list           = document.getElementById('entries-list');
+    const filters  = document.querySelectorAll('.filter-btn');
+    const totalEl        = document.getElementById('total-sum');
+    const savingsEl      = document.getElementById('savings-sum');
+
     const currencySymbols = { BGN: 'лв.', USD: '$', EUR: '€' };
 
     let currency = localStorage.getItem('currency') || 'BGN';
@@ -18,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('currency', currency);
         loadAndRender();
     });
-
     let currentFilter = 'all';
 
     async function loadAndRender() {
@@ -45,9 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
         entries
             .filter(e => currentFilter === 'all' || e.type === currentFilter)
             .forEach(e => {
+                const date = new Date(e.date).toLocaleDateString('bg-BG');
                 const li = document.createElement('li');
                 li.className = `entry-item ${e.type}`;
                 li.innerHTML = `
+          <span class="date">${date}</span>
           <span class="amount">
             ${e.type === 'expense' ? '−' : '+'}${e.amount.toFixed(2)} ${symbol}
           </span>
@@ -65,11 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isNaN(amt) || !cat) return;
 
+        const now = new Date().toISOString();
+
         await addEntry({
             amount:   Math.abs(amt),
             category: cat,
             type:     type,
-            date:     Date.now()
+            date:     now
         });
 
         amtInput.value = '';
